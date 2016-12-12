@@ -65,4 +65,14 @@ public class Employee implements Serializable {
 		this.lastName = lastName;
 	}
 
+	@Override
+	public String toString() {
+		return "Employee{" +
+				"employeeId=" + employeeId +
+				", age=" + age +
+				", firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", department=" + department +
+				'}';
+	}
 }
