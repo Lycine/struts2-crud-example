@@ -38,7 +38,6 @@ public class DepartmentDaoImp implements DepartmentDao {
             }
             return list;
         } catch (Exception e) {
-            tx.commit();//提交事务
             logger.error("getAllDepartments error");
             e.printStackTrace();
             return list;

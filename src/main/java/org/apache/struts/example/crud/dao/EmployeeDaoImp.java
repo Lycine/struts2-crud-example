@@ -50,11 +50,13 @@ public class EmployeeDaoImp implements EmployeeDao {
         Employee employee = new Employee();
         List<Employee> list = new ArrayList<Employee>();
         String hql = "";
+        System.out.println("Employee id is: " + id);
         try {
             Session session = HibernateUtil.getSession();
             tx = session.beginTransaction();//开启事务
-            hql = "FROM Employee E WHERE E.id = ?";
+            hql = "FROM Employee E WHERE E.id = :id";
             Query query = session.createQuery(hql);
+            query.setParameter("id",id);
             list = query.list();
             tx.commit();//提交事务
             System.out.println("*****result*****");
@@ -70,7 +72,6 @@ public class EmployeeDaoImp implements EmployeeDao {
             }
             return employee;
         } catch (Exception e) {
-            tx.commit();//提交事务
             logger.error("getEmployee error");
             e.printStackTrace();
             return employee;
@@ -111,12 +112,7 @@ public class EmployeeDaoImp implements EmployeeDao {
         try {
             Session session = HibernateUtil.getSession();
             tx = session.beginTransaction();//开启事务
-            Employee employee = new Employee();
-            employee.setAge(123456);
-            employee.setDepartment(new Department(3, "test-departmentName"));
-            employee.setFirstName("first");
-            employee.setLastName("last");
-            session.save(employee);
+            session.save(emp);
             tx.commit();//提交事务
             System.out.println("*****result*****");
             logger.debug("insert emp success");

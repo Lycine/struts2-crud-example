@@ -145,4 +145,37 @@ public class TestHibernate {
                 session.close();
         }
     }
+
+    @Test
+    public void tesr(){
+        int id = 1;
+        Transaction tx = null;
+        Employee employee = new Employee();
+        List<Employee> list = new ArrayList<Employee>();
+        String hql = "";
+        System.out.println("Employee id is: " + id);
+        try {
+            Session session = HibernateUtil.getSession();
+            tx = session.beginTransaction();//开启事务
+            hql = "FROM Employee E WHERE E.id = :id";
+            Query query = session.createQuery(hql);
+            query.setParameter("id",id);
+            list = query.list();
+            tx.commit();//提交事务
+            System.out.println("*****result*****");
+            for (Employee e : list) {
+//                logger.debug(employee.toString());
+                System.out.println(e.toString());
+            }
+            employee = list.get(0);
+            if (list.size() > 1) {
+                logger.error("getEmployee error, not unique result.");
+            } else {
+                logger.debug("getEmployee success");
+            }
+        } catch (Exception e) {
+            logger.error("getEmployee error");
+            e.printStackTrace();
+        }
+    }
 }
