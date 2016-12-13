@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InMemoryDepartmentDao implements DepartmentDao {
-
+public class InMemoryDepartmentDao  {
+//implements DepartmentDao
     private static List<Department> departments;
     private static Map<Integer, Department> departmentsMap;
 

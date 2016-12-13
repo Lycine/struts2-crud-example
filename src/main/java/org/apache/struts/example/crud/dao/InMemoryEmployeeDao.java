@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class InMemoryEmployeeDao implements EmployeeDao {
-
+public class InMemoryEmployeeDao {
+//implements EmployeeDao
     private static Map<Integer, Department> departmentsMap;
     private static ArrayList<Employee> employees;
 
@@ -16,16 +16,17 @@ public class InMemoryEmployeeDao implements EmployeeDao {
         employees = new ArrayList<Employee>();
         employees.add(new Employee(1, "John", "Doe", 36, new Department(100, "Accounting")));
         employees.add(new Employee(2, "Bob", "Smith", 25, new Department(300, "Sales")));
-        DepartmentDao deptDao = new InMemoryDepartmentDao();
+//        DepartmentDao deptDao = new InMemoryDepartmentDao();
+        DepartmentDao deptDao = new DepartmentDaoImp();
         departmentsMap = deptDao.getDepartmentsMap();
     }
 
-    @Override
+//    @Override
     public List getAllEmployees() {
         return employees;
     }
 
-    @Override
+//    @Override
     public Employee getEmployee(Integer id) {
         Employee emp = null;
         for (Employee employee : employees) {
@@ -37,7 +38,7 @@ public class InMemoryEmployeeDao implements EmployeeDao {
         return emp;
     }
 
-    @Override
+//    @Override
     public void update(Employee emp) {
         Integer id = emp.getEmployeeId();
         for (int i = 0; i < employees.size(); i++) {
@@ -50,7 +51,7 @@ public class InMemoryEmployeeDao implements EmployeeDao {
         }
     }
 
-    @Override
+//    @Override
     public void insert(Employee emp) {
         int lastId = 0;
         for (Employee temp : employees) {
@@ -63,7 +64,7 @@ public class InMemoryEmployeeDao implements EmployeeDao {
         employees.add(emp);
     }
 
-    @Override
+//    @Override
     public void delete(Integer id) {
         for (int i = 0; i < employees.size(); i++) {
             Employee tempEmp = employees.get(i);
